@@ -285,3 +285,6 @@ __pycache__/
 *.swp
 *.swo
 *~
+
+#test files
+/test
