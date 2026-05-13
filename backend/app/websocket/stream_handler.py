@@ -1,10 +1,17 @@
 from fastapi import WebSocket
 from fastapi import WebSocketDisconnect
 
+import json
+
+from app.utils.image_utils import decode_base64_image
+
+from app.models.yolo.detector import detect_objects
+
+from app.annotators.road_annotator import draw_detections
+
 
 async def websocket_endpoint(websocket: WebSocket):
 
-    # Accept connection
     await websocket.accept()
 
     print("Client Connected")
@@ -13,14 +20,44 @@ async def websocket_endpoint(websocket: WebSocket):
 
         while True:
 
-            # Receive message from frontend
+            # Receive JSON
             data = await websocket.receive_text()
 
-            print(f"Received: {data}")
+            # Convert JSON string to dictionary
+            data = json.loads(data)
 
-            # Send response back
+            # Extract frames
+            road_frame_base64 = data["road_frame"]
+
+            cabin_frame_base64 = data["cabin_frame"]
+
+            # Decode frames
+            road_frame = decode_base64_image(
+                road_frame_base64
+            )
+
+            cabin_frame = decode_base64_image(
+                cabin_frame_base64
+            )
+
+            print("Frames Received")
+
+            # YOLO Detection
+            detections = detect_objects(
+                road_frame
+            )
+
+            print(detections)
+
+            # Draw detections
+            annotated_frame = draw_detections(
+                road_frame,
+                detections
+            )
+
+            # Send response
             await websocket.send_text(
-                f"Backend Received: {data}"
+                "YOLO Detection Complete"
             )
 
     except WebSocketDisconnect:
