@@ -1,65 +1,133 @@
 from fastapi import WebSocket
-from fastapi import WebSocketDisconnect
 
-import json
+from app.utils.image_utils import (
+    decode_base64_image,
+    encode_image_to_base64
+)
 
-from app.utils.image_utils import decode_base64_image
+from app.processors.road_processor import (
+    process_road_frame
+)
 
-from app.models.yolo.detector import detect_objects
+from app.processors.driver_processor import (
+    process_driver_frame
+)
 
-from app.annotators.road_annotator import draw_detections
+from app.processors.fusion_processor import (
+    fuse_risk_scores
+)
 
 
-async def websocket_endpoint(websocket: WebSocket):
+# =========================================
+# WEBSOCKET STREAM HANDLER
+# =========================================
 
+async def websocket_endpoint(
+    websocket: WebSocket
+):
+
+    # ACCEPT CONNECTION
     await websocket.accept()
 
-    print("Client Connected")
+    print("WebSocket Client Connected")
 
     try:
 
         while True:
 
-            # Receive JSON
-            data = await websocket.receive_text()
+            # ---------------------------------
+            # RECEIVE DATA
+            # ---------------------------------
 
-            # Convert JSON string to dictionary
-            data = json.loads(data)
+            data = await websocket.receive_json()
 
             # Extract frames
             road_frame_base64 = data["road_frame"]
 
-            cabin_frame_base64 = data["cabin_frame"]
+            driver_frame_base64 = data["driver_frame"]
 
-            # Decode frames
+            # ---------------------------------
+            # DECODE FRAMES
+            # ---------------------------------
+
             road_frame = decode_base64_image(
                 road_frame_base64
             )
 
-            cabin_frame = decode_base64_image(
-                cabin_frame_base64
+            driver_frame = decode_base64_image(
+                driver_frame_base64
             )
 
-            print("Frames Received")
+            # ---------------------------------
+            # PROCESS ROAD STREAM
+            # ---------------------------------
 
-            # YOLO Detection
-            detections = detect_objects(
+            road_result = process_road_frame(
                 road_frame
             )
 
-            print(detections)
+            # ---------------------------------
+            # PROCESS DRIVER STREAM
+            # ---------------------------------
 
-            # Draw detections
-            annotated_frame = draw_detections(
-                road_frame,
-                detections
+            driver_result = process_driver_frame(
+                driver_frame
             )
 
-            # Send response
-            await websocket.send_text(
-                "YOLO Detection Complete"
+            # ---------------------------------
+            # FUSION
+            # ---------------------------------
+
+            fusion_result = fuse_risk_scores(
+
+                road_result,
+                driver_result
             )
 
-    except WebSocketDisconnect:
+            # ---------------------------------
+            # ENCODE OUTPUTS
+            # ---------------------------------
 
-        print("Client Disconnected")
+            encoded_road_frame = encode_image_to_base64(
+
+                road_result["annotated_frame"]
+            )
+
+            encoded_driver_frame = encode_image_to_base64(
+
+                driver_result["annotated_frame"]
+            )
+
+            # ---------------------------------
+            # SEND RESULTS
+            # ---------------------------------
+
+            await websocket.send_json({
+
+                "road_score":
+                fusion_result["road_score"],
+
+                "driver_score":
+                fusion_result["driver_score"],
+
+                "fused_score":
+                fusion_result["fused_score"],
+
+                "risk_level":
+                fusion_result["risk_level"],
+
+                "road_frame_annotated":
+                encoded_road_frame,
+
+                "driver_frame_annotated":
+                encoded_driver_frame
+            })
+
+    except Exception as error:
+
+        print(
+            "WebSocket Error:",
+            error
+        )
+
+        await websocket.close()
