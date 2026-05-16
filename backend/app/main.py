@@ -1,36 +1,55 @@
-from fastapi import FastAPI
-from fastapi import WebSocket
+from fastapi import FastAPI, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.websocket.stream_handler import websocket_endpoint
-from app.config import *
+from app.websocket.stream_handler import (
+    websocket_endpoint
+)
 
-app = FastAPI(title=APP_NAME, version=APP_VERSION, debug=DEBUG)
+# =========================================
+# FASTAPI APP
+# =========================================
 
-# Add CORS middleware
+app = FastAPI()
+
+# =========================================
+# CORS MIDDLEWARE
+# =========================================
+
 app.add_middleware(
+
     CORSMiddleware,
-    allow_origins=ALLOWED_ORIGINS,
+
+    allow_origins=["*"],
+
     allow_credentials=True,
+
     allow_methods=["*"],
+
     allow_headers=["*"],
 )
 
+# =========================================
+# ROOT ROUTE
+# =========================================
 
 @app.get("/")
-async def home():
+def home():
+
     return {
-        "message": "DriveSafe Backend Running",
-        "version": APP_VERSION,
-        "status": "healthy"
+
+        "message":
+        "DriveSafe Backend Running"
     }
 
-
-@app.get("/health")
-async def health_check():
-    return {"status": "healthy"}
-
+# =========================================
+# WEBSOCKET ROUTE
+# =========================================
 
 @app.websocket("/ws")
-async def websocket_route(websocket: WebSocket):
-    await websocket_endpoint(websocket)
+async def websocket_route(
+    websocket: WebSocket
+):
+
+    await websocket_endpoint(
+        websocket
+    )
