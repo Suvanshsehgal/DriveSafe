@@ -43,7 +43,7 @@ export default function AlertFeed() {
             animation: "pulse-glow 1s ease-in-out infinite",
           }}
         />
-        <span className="text-xs text-white/60 uppercase tracking-widest font-medium">Live Alerts</span>
+        <span className="text-xs text-white/60 uppercase tracking-widest font-medium font-body">Live Alerts</span>
       </div>
 
       <div className="space-y-2 max-h-[260px] overflow-y-auto pr-1">
@@ -67,8 +67,8 @@ export default function AlertFeed() {
               >
                 <Icon className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" style={{ color: config.color }} />
                 <div className="flex-1 min-w-0">
-                  <p className="text-white/80 leading-relaxed">{alert.message}</p>
-                  <p className="text-[10px] text-white/30 mt-0.5 font-mono">{alert.time}</p>
+                  <p className="text-white/80 leading-relaxed font-body">{alert.message}</p>
+                  <p className="text-[10px] text-white/30 mt-0.5 font-mono font-body">{alert.time}</p>
                 </div>
               </motion.div>
             );

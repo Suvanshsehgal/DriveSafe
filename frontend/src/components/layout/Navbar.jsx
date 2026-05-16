@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Shield, Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Home", href: "#home" },
   { label: "Problem", href: "#problem" },
   { label: "Architecture", href: "#architecture" },
   { label: "Tech Stack", href: "#techstack" },
@@ -48,7 +47,7 @@ export default function Navbar() {
                 }}
               />
             </div>
-            <span className="text-lg font-bold text-white tracking-tight">
+            <span className="text-lg font-bold text-white tracking-tight font-heading">
               Drive<span className="text-neon-blue">Safe</span>
             </span>
           </motion.a>
@@ -58,7 +57,7 @@ export default function Navbar() {
               <motion.a
                 key={link.label}
                 href={link.href}
-                className="text-sm text-white/60 hover:text-neon-blue transition-colors relative group"
+                className="text-sm text-white/60 hover:text-neon-blue transition-colors relative group font-body"
                 whileHover={{ x: 2 }}
               >
                 {link.label}
@@ -68,7 +67,7 @@ export default function Navbar() {
             <motion.a
               href="#demo"
               whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(0, 212, 255, 0.3)" }}
-              className="px-5 py-2 rounded-xl bg-neon-blue/20 border border-neon-blue/40 text-neon-blue text-sm font-medium backdrop-blur-md transition-all duration-300 hover:bg-neon-blue/30"
+              className="px-5 py-2 rounded-xl bg-neon-blue/20 border border-neon-blue/40 text-neon-blue text-sm font-medium backdrop-blur-md transition-all duration-300 hover:bg-neon-blue/30 font-body"
             >
               Launch Dashboard
             </motion.a>
@@ -97,7 +96,7 @@ export default function Navbar() {
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="block text-sm text-white/60 hover:text-neon-blue py-2 transition-colors"
+                  className="block text-sm text-white/60 hover:text-neon-blue py-2 transition-colors font-body"
                 >
                   {link.label}
                 </a>
@@ -105,7 +104,7 @@ export default function Navbar() {
               <a
                 href="#demo"
                 onClick={() => setMobileOpen(false)}
-                className="block text-center px-5 py-2.5 rounded-xl bg-neon-blue/20 border border-neon-blue/40 text-neon-blue text-sm font-medium"
+                className="block text-center px-5 py-2.5 rounded-xl bg-neon-blue/20 border border-neon-blue/40 text-neon-blue text-sm font-medium font-body"
               >
                 Launch Dashboard
               </a>

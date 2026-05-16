@@ -19,7 +19,7 @@ export default function ScorePanel() {
             animation: "pulse-glow 1.5s ease-in-out infinite",
           }}
         />
-        <span className="text-xs text-white/60 uppercase tracking-widest font-medium">Live Scores</span>
+        <span className="text-xs text-white/60 uppercase tracking-widest font-medium font-body">Live Scores</span>
       </div>
 
       <div className="space-y-4">

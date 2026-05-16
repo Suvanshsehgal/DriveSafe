@@ -10,8 +10,8 @@ export default function ControlPanel() {
     >
       <div className="text-center">
         <Icon className="w-8 h-8 mx-auto mb-2 text-white/30 group-hover:text-neon-blue transition-colors" />
-        <p className="text-xs text-white/40 font-mono">{label}</p>
-        <p className="text-[10px] text-white/20 mt-1">Click or drag to upload</p>
+        <p className="text-xs text-white/40 font-mono font-body">{label}</p>
+        <p className="text-[10px] text-white/20 mt-1 font-body">Click or drag to upload</p>
       </div>
     </motion.div>
   );
@@ -33,7 +33,7 @@ export default function ControlPanel() {
             animation: "pulse-glow 1.5s ease-in-out infinite",
           }}
         />
-        <span className="text-xs text-white/60 uppercase tracking-widest font-medium">Control Panel</span>
+        <span className="text-xs text-white/60 uppercase tracking-widest font-medium font-body">Control Panel</span>
       </div>
 
       <div className="space-y-3">

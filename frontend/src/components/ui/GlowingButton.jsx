@@ -36,7 +36,7 @@ export default function GlowingButton({
       onClick={onClick}
       disabled={disabled}
       className={`
-        relative px-6 py-3 rounded-xl border font-medium
+        relative px-6 py-3 rounded-xl border font-body
         backdrop-blur-md transition-all duration-300
         disabled:opacity-40 disabled:cursor-not-allowed
         cursor-pointer text-sm tracking-wide

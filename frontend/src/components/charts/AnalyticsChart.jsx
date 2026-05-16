@@ -28,9 +28,9 @@ const CustomTooltip = ({ active, payload, label }) => {
   if (!active || !payload) return null;
   return (
     <div className="bg-dark-card/90 backdrop-blur-xl border border-white/10 rounded-lg px-3 py-2 text-xs">
-      <p className="text-white/60 mb-1">{label}</p>
+      <p className="text-white/60 mb-1 font-body">{label}</p>
       {payload.map((entry) => (
-        <p key={entry.name} style={{ color: entry.color }} className="font-mono">
+        <p key={entry.name} style={{ color: entry.color }} className="font-mono font-body">
           {entry.name}: {(entry.value * 100).toFixed(0)}%
         </p>
       ))}
@@ -74,7 +74,7 @@ export default function AnalyticsChart() {
             animation: "pulse-glow 1.5s ease-in-out infinite",
           }}
         />
-        <span className="text-xs text-white/60 uppercase tracking-widest font-medium">Analytics — Rolling Trends</span>
+        <span className="text-xs text-white/60 uppercase tracking-widest font-medium font-body">Analytics — Rolling Trends</span>
       </div>
 
       <div className="h-64 md:h-72">

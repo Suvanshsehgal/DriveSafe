@@ -30,7 +30,7 @@ export default function VideoPanel({ title, icon: Icon = Camera, accent = "#00d4
           >
             <Icon className="w-8 h-8" style={{ color: accent }} />
           </div>
-          <p className="text-sm text-white/30 font-mono">{title} Feed</p>
+          <p className="text-sm text-white/30 font-mono font-body">{title} Feed</p>
         </div>
 
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -55,11 +55,11 @@ export default function VideoPanel({ title, icon: Icon = Camera, accent = "#00d4
               animation: "pulse-glow 1.5s ease-in-out infinite",
             }}
           />
-          <span className="text-xs text-white/50 font-mono">LIVE</span>
+          <span className="text-xs text-white/50 font-mono font-body">LIVE</span>
         </div>
         <div className="flex items-center gap-3">
-          <span className="text-xs text-white/30 font-mono">AI: <span style={{ color: accent }}>ACTIVE</span></span>
-          <span className="text-xs text-white/30 font-mono">FPS: 30</span>
+          <span className="text-xs text-white/30 font-mono font-body">AI: <span style={{ color: accent }}>ACTIVE</span></span>
+          <span className="text-xs text-white/30 font-mono font-body">FPS: 30</span>
         </div>
       </div>
     </motion.div>
