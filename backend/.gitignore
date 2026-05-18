@@ -288,3 +288,12 @@ __pycache__/
 
 #test files
 /test
+
+#output files
+/outputs
+
+#results
+/results
+
+#upload 
+/uploads
