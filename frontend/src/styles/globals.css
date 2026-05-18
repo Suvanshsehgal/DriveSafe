@@ -1,6 +1,4 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-
 @theme {
   --color-neon-blue: #00d4ff;
   --color-neon-purple: #7c3aed;
@@ -14,85 +12,68 @@
   --color-glass-border: rgba(255, 255, 255, 0.08);
   --font-sans: 'Space Grotesk', system-ui, sans-serif;
 }
-
 @keyframes pulse-glow {
   0%, 100% { opacity: 0.4; }
   50% { opacity: 1; }
 }
-
 @keyframes scan-line {
   0% { top: 0; }
   100% { top: 100%; }
 }
-
 @keyframes radar-sweep {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
 }
-
 @keyframes pulse-ring {
   0% { transform: scale(1); opacity: 1; }
   100% { transform: scale(1.5); opacity: 0; }
 }
-
 @keyframes flicker {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.3; }
 }
-
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
-
 @keyframes slide-up {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes slide-in-right {
   from { opacity: 0; transform: translateX(50px); }
   to { opacity: 1; transform: translateX(0); }
 }
-
 @keyframes glow-pulse {
   0%, 100% { box-shadow: 0 0 5px var(--color-neon-blue), 0 0 10px var(--color-neon-blue); }
   50% { box-shadow: 0 0 15px var(--color-neon-blue), 0 0 30px var(--color-neon-blue); }
 }
-
 @keyframes data-stream {
   0% { transform: translateY(-100%); }
   100% { transform: translateY(100%); }
 }
-
 @keyframes border-glow {
   0%, 100% { border-color: rgba(0, 212, 255, 0.2); }
   50% { border-color: rgba(0, 212, 255, 0.6); }
 }
-
 * {
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 212, 255, 0.3) transparent;
 }
-
 *::-webkit-scrollbar {
   width: 6px;
 }
-
 *::-webkit-scrollbar-track {
   background: transparent;
 }
-
 *::-webkit-scrollbar-thumb {
   background: rgba(0, 212, 255, 0.3);
   border-radius: 3px;
 }
-
 body {
   background: #0a0a1a;
   color: #e2e8f0;
@@ -100,18 +81,15 @@ body {
   font-weight: 400; /* Regular weight for body text */
   overflow-x: hidden;
 }
-
 /* Font weight utility classes */
 .font-heading {
   font-family: 'Space Grotesk', system-ui, sans-serif;
   font-weight: 700; /* Bold for headings */
 }
-
 .font-subheading {
   font-family: 'Space Grotesk', system-ui, sans-serif;
   font-weight: 500; /* Medium for subheadings */
 }
-
 .font-body {
   font-family: 'Space Grotesk', system-ui, sans-serif;
   font-weight: 400; /* Regular for body text */
