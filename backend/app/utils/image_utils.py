@@ -30,15 +30,17 @@ def decode_base64_image(base64_string):
 # IMAGE → BASE64
 # =========================================
 
-def encode_image_to_base64(frame):
+def encode_image_to_base64(frame, quality=60):
 
-    _, buffer = cv2.imencode(
-        ".jpg",
-        frame
-    )
+    h, w = frame.shape[:2]
+    if w > 640:
+        scale = 640 / w
+        new_w, new_h = 640, int(h * scale)
+        frame = cv2.resize(frame, (new_w, new_h), interpolation=cv2.INTER_LINEAR)
 
-    encoded = base64.b64encode(
-        buffer
-    ).decode("utf-8")
+    encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), quality]
+    _, buffer = cv2.imencode(".jpg", frame, encode_param)
+
+    encoded = base64.b64encode(buffer).decode("utf-8")
 
     return encoded
