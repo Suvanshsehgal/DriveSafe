@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   LineChart,
@@ -10,19 +9,6 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
-
-const generateData = () => {
-  const data = [];
-  for (let i = 0; i < 20; i++) {
-    data.push({
-      time: `${i}s`,
-      road: Math.random() * 0.5 + 0.1,
-      driver: Math.random() * 0.4 + 0.05,
-      fused: Math.random() * 0.4 + 0.1,
-    });
-  }
-  return data;
-};
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (!active || !payload) return null;
@@ -38,23 +24,14 @@ const CustomTooltip = ({ active, payload, label }) => {
   );
 };
 
-export default function AnalyticsChart() {
-  const [data, setData] = useState(generateData());
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setData((prev) => {
-        const newPoint = {
-          time: `${prev.length}s`,
-          road: Math.random() * 0.5 + 0.1,
-          driver: Math.random() * 0.4 + 0.05,
-          fused: Math.random() * 0.4 + 0.1,
-        };
-        return [...prev.slice(1), newPoint];
-      });
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+export default function AnalyticsChart({ data = [] }) {
+  // Default data if none provided
+  const chartData = data.length > 0 ? data : Array.from({ length: 20 }, (_, i) => ({
+    time: `${i}s`,
+    road: 0.32,
+    driver: 0.18,
+    fused: 0.26
+  }));
 
   return (
     <motion.div
@@ -79,7 +56,7 @@ export default function AnalyticsChart() {
 
       <div className="h-64 md:h-72">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 5, right: 5, left: -20, bottom: 5 }}>
+          <LineChart data={chartData} margin={{ top: 5, right: 5, left: -20, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
             <XAxis
               dataKey="time"
@@ -92,6 +69,7 @@ export default function AnalyticsChart() {
               tick={{ fill: "rgba(255,255,255,0.3)", fontSize: 10 }}
               axisLine={{ stroke: "rgba(255,255,255,0.05)" }}
               tickFormatter={(v) => `${(v * 100).toFixed(0)}%`}
+              domain={[0, 1]}
             />
             <Tooltip content={<CustomTooltip />} />
             <Legend

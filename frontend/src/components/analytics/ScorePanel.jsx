@@ -1,11 +1,15 @@
 import { motion } from "framer-motion";
 import ProgressBar from "../ui/ProgressBar";
 
-export default function ScorePanel() {
+export default function ScorePanel({ 
+  roadScore = 0.32, 
+  driverScore = 0.18, 
+  fusedScore = 0.26 
+}) {
   const scores = [
-    { label: "Road Hazard Score", value: 0.32, color: "#22d3ee" },
-    { label: "Driver State Score", value: 0.18, color: "#10b981" },
-    { label: "Fused Score", value: 0.26, color: "#00d4ff" },
+    { label: "Road Hazard Score", value: roadScore, color: "#22d3ee" },
+    { label: "Driver State Score", value: driverScore, color: "#10b981" },
+    { label: "Fused Score", value: fusedScore, color: "#00d4ff" },
   ];
 
   return (
