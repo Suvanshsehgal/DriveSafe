@@ -23,9 +23,7 @@ const techs = [
   { icon: CloudSun, title: "DAWN Dataset", description: "Weather-degraded image dataset for fog, rain, snow, and low-light training.", color: "#10b981" },
   { icon: Server, title: "FastAPI", description: "High-performance Python async framework powering the real-time WebSocket backend.", color: "#00d4ff" },
   { icon: Code2, title: "React + Vite", description: "Modern frontend stack with Vite's lightning-fast HMR and React 19.", color: "#22d3ee" },
-  { icon: Palette, title: "Tailwind CSS", description: "Utility-first CSS framework with custom design system for futuristic UI.", color: "#06b6d4" },
-  { icon: Wifi, title: "WebSockets", description: "Persistent bidirectional communication for live streaming inference results.", color: "#7c3aed" },
-  { icon: BarChart3, title: "Recharts", description: "Composable charting library for real-time analytics visualization.", color: "#10b981" },
+  { icon: Palette, title: "Tailwind CSS", description: "Utility-first CSS framework with custom design system for futuristic UI.", color: "#06b6d4" }
 ];
 
 export default function TechStackSection() {

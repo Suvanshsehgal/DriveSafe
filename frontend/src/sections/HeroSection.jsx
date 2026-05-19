@@ -144,7 +144,7 @@ export default function HeroSection() {
           transition={{ duration: 1, delay: 0.8 }}
           className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-3xl mx-auto"
         >
-          {[
+          {/* {[
             { label: "Detection Rate", value: "99.2%", color: "#10b981" },
             { label: "Latency", value: "<30ms", color: "#22d3ee" },
             { label: "Indian Roads Trained", value: "50K+", color: "#00d4ff" },
@@ -156,12 +156,12 @@ export default function HeroSection() {
               </p>
               <p className="text-[10px] text-white/30 uppercase tracking-wider mt-1 font-body">{stat.label}</p>
             </div>
-          ))}
+          ))} */}
         </motion.div>
       </div>
 
       {/* Scroll indicator */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
@@ -175,7 +175,7 @@ export default function HeroSection() {
           <span className="text-[10px] text-white/20 uppercase tracking-[0.2em] font-body">Scroll</span>
           <div className="w-px h-8 bg-gradient-to-b from-neon-blue/40 to-transparent" />
         </motion.div>
-      </motion.div>
+      </motion.div> */}
     </section>
   );
 }

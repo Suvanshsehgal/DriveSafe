@@ -102,7 +102,7 @@ export default function ArchitectureSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="How It Works"
-          subtitle="Two independent neural pipelines run in parallel — road perception and driver state — fused by a real-time risk classifier."
+          subtitle="Two independent neural pipelines run in parallel — road perception and driver state monitoring — fused by a weighted Bayesian risk classifier for real-time alerting."
           glowColor="#00d4ff"
         />
 
@@ -124,19 +124,21 @@ export default function ArchitectureSection() {
               <span className="text-xs text-white/30">Forward-facing</span>
             </div>
             <div className="flex flex-col items-stretch gap-0">
-              <PipelineNode icon={Camera} label="Road Camera" sub="1080p · 30 fps" color={roadColor} delay={0} side="left" />
+              <PipelineNode icon={Camera} label="Road Camera" sub="Forward-facing · 1080p · 30fps" color={roadColor} delay={0} side="left" />
               <Arrow color={roadColor} delay={0.1} label="" />
-              <PipelineNode icon={Box} label="YOLO11m Detection" sub="vehicles · cattle · pedestrians" color={roadColor} delay={0.15} side="left" />
+              <PipelineNode icon={Box} label="YOLO11m Detection" sub="vehicles · cattle · auto-rickshaws · pedestrians" color={roadColor} delay={0.15} side="left" />
               <Arrow color={roadColor} delay={0.2} label="" />
-              <PipelineNode icon={Mountain} label="MiDaS Depth" sub="monocular depth estimation" color={roadColor} delay={0.25} side="left" />
+              <PipelineNode icon={Mountain} label="MiDaS Depth Estimation" sub="monocular depth · distance classification" color={roadColor} delay={0.25} side="left" />
               <Arrow color={roadColor} delay={0.3} label="" />
-              <PipelineNode icon={ShieldAlert} label="" sub="0 — 100" color={roadColor} delay={0.35} side="left" />
+              <PipelineNode icon={ShieldAlert} label="Indian Road Danger Weighting" sub="object class × proximity multiplier" color={roadColor} delay={0.35} side="left" />
+              <Arrow color={roadColor} delay={0.4} label="" />
+              <PipelineNode icon={Activity} label="Road Hazard Score" sub="normalized 0 – 1" color={roadColor} delay={0.45} side="left" />
             </div>
           </motion.div>
 
           {/* CENTER: Animated merging SVG */}
           <div className="hidden lg:flex flex-col items-center justify-center" style={{ paddingTop: "64px" }}>
-            <svg width="160" height="260" viewBox="0 0 160 260" fill="none" overflow="visible">
+            <svg width="160" height="480" viewBox="0 0 160 480" fill="none" overflow="visible">
               {/* Left curve — cyan, flows toward center */}
               <path
                 className="flow-line"
@@ -161,14 +163,14 @@ export default function ArchitectureSection() {
               {/* Vertical down line — purple, flows downward */}
               <line
                 className="flow-line"
-                x1="80" y1="130" x2="80" y2="230"
+                x1="80" y1="130" x2="80" y2="420"
                 stroke={driverColor}
                 strokeWidth="1.8"
                 strokeLinecap="round"
               />
 
               {/* Arrowhead */}
-              <polygon points="80,248 73,232 87,232" fill={driverColor} />
+              <polygon points="80,440 73,420 87,420" fill={driverColor} />
             </svg>
           </div>
 
@@ -188,13 +190,15 @@ export default function ArchitectureSection() {
               <span className="text-xs text-white/30">Cabin-facing</span>
             </div>
             <div className="flex flex-col items-stretch gap-0">
-              <PipelineNode icon={Camera} label="Cabin Camera" sub="IR · 60 fps" color={driverColor} delay={0} side="right" />
+              <PipelineNode icon={Camera} label="Cabin Camera" sub="Driver-facing · IR · 30fps" color={driverColor} delay={0} side="right" />
               <Arrow color={driverColor} delay={0.1} label="" />
-              <PipelineNode icon={Eye} label="Facial Landmarks" sub="dlib · 68 points" color={driverColor} delay={0.15} side="right" />
+              <PipelineNode icon={Eye} label="MediaPipe Face Landmarks" sub="468 landmarks · 6 DoF head pose" color={driverColor} delay={0.15} side="right" />
               <Arrow color={driverColor} delay={0.2} label="" />
-              <PipelineNode icon={Activity} label="EAR · MAR · PERCLOS" sub="biometric features" color={driverColor} delay={0.25} side="right" />
+              <PipelineNode icon={Activity} label="EAR · MAR · PERCLOS" sub="drowsiness &amp; yawn detection" color={driverColor} delay={0.25} side="right" />
               <Arrow color={driverColor} delay={0.3} label="" />
-              <PipelineNode icon={ShieldAlert} label="Driver State Score" sub="0 — 100" color={driverColor} delay={0.35} side="right" />
+              <PipelineNode icon={Brain} label="Head Pose &amp; Nod Detection" sub="pitch · yaw · roll · nodding" color={driverColor} delay={0.35} side="right" />
+              <Arrow color={driverColor} delay={0.4} label="" />
+              <PipelineNode icon={ShieldAlert} label="Driver State Fusion" sub="weighted biometric score · 0 – 1" color={driverColor} delay={0.45} side="right" />
             </div>
           </motion.div>
         </div>
@@ -209,11 +213,13 @@ export default function ArchitectureSection() {
         >
           <div className="flex flex-col items-center gap-2">
             <div
-              className="w-px h-8"
+              className="w-px h-1"
               style={{ background: "linear-gradient(to bottom, transparent, rgba(0,212,255,0.5))" }}
             />
             <div
-              className="flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono"
+              className="flex ite
+              
+              ms-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono"
               style={{
                 background: "rgba(0,212,255,0.08)",
                 border: "1px solid rgba(0,212,255,0.25)",
@@ -224,7 +230,7 @@ export default function ArchitectureSection() {
               Dual Stream Merge
             </div>
             <div
-              className="w-px h-6"
+              className="w-px h-12"
               style={{ background: "linear-gradient(to bottom, rgba(0,212,255,0.5), rgba(0,212,255,0.9))" }}
             />
           </div>
@@ -255,12 +261,12 @@ export default function ArchitectureSection() {
                 <GitMerge className="w-7 h-7" style={{ color: "#00d4ff" }} />
               </div>
 
-              <h3 className="text-xl font-bold text-white mb-2">Fusion Engine</h3>
+              <h3 className="text-xl font-bold text-white mb-2">Risk Fusion Engine</h3>
               <p className="text-xs text-white/40 font-mono uppercase tracking-wider mb-2">
-                weighted Bayesian fusion · risk classification
+                weighted Bayesian fusion · real-time classification
               </p>
               <p className="text-sm text-white/40 mb-6">
-                60% Road Score + 40% Driver Score → Unified Risk Assessment
+                Road Hazard (60%) + Driver State (40%) → Unified Risk Score → WebSocket stream &amp; annotated video output
               </p>
 
               <div className="flex items-center justify-center gap-3">
