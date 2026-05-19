@@ -67,9 +67,9 @@ export default function RiskBadge({ level = "LOW" }) {
           />
         </motion.div>
 
-        <p className="text-[10px] text-white/40 uppercase tracking-widest mb-1">Fused Risk Level</p>
+        <p className="text-[10px] text-white/40 uppercase tracking-widest mb-1 font-body">Fused Risk Level</p>
         <motion.p
-          className="text-2xl font-bold tracking-wider"
+          className="text-2xl font-bold tracking-wider font-heading"
           style={{
             color: config.color,
             textShadow: `0 0 20px ${config.color}60`,

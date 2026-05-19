@@ -14,9 +14,9 @@ export default function ProgressBar({
     <div className={`w-full ${className}`}>
       {(label || showValue) && (
         <div className="flex justify-between items-center mb-1.5">
-          {label && <span className="text-xs text-white/60 uppercase tracking-wider">{label}</span>}
+          {label && <span className="text-xs text-white/60 uppercase tracking-wider font-body">{label}</span>}
           {showValue && (
-            <span className="text-xs font-mono" style={{ color }}>
+            <span className="text-xs font-mono font-body" style={{ color }}>
               {Math.round(value * 100)}%
             </span>
           )}

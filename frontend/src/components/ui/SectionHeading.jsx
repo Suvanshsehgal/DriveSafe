@@ -15,7 +15,7 @@ export default function SectionHeading({
       className={`text-center mb-16 ${className}`}
     >
       <h2
-        className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-white to-white/60 bg-clip-text text-transparent"
+        className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-white to-white/60 bg-clip-text text-transparent font-heading"
         style={{
           textShadow: `0 0 40px ${glowColor}30`,
         }}
@@ -23,7 +23,7 @@ export default function SectionHeading({
         {title}
       </h2>
       {subtitle && (
-        <p className="text-white/50 text-lg max-w-2xl mx-auto leading-relaxed">
+        <p className="text-white/50 text-lg max-w-2xl mx-auto leading-relaxed font-body">
           {subtitle}
         </p>
       )}

@@ -25,9 +25,9 @@ export default function ProblemCard({ icon: Icon, title, description, stat, colo
             <Icon className="w-6 h-6" style={{ color }} />
           </div>
 
-          <h3 className="text-lg font-semibold text-white mb-2">{title}</h3>
+          <h3 className="text-lg font-semibold text-white mb-2 font-subheading">{title}</h3>
 
-          <p className="text-sm text-white/50 leading-relaxed mb-4">{description}</p>
+          <p className="text-sm text-white/50 leading-relaxed mb-4 font-body">{description}</p>
 
           {stat && (
             <div
