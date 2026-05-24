@@ -9,10 +9,13 @@ RUN apt-get update && apt-get install -y \
     libxext6 \
     libxrender-dev \
     libgomp1 \
+    wget \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+
+RUN pip install --no-cache-dir --timeout 300 torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+RUN pip install --no-cache-dir --timeout 300 -r requirements.txt
 
 COPY . .
 
