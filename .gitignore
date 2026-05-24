@@ -1,0 +1,12 @@
+# Model weights and datasets
+*.pt
+*.pth
+*.task
+*.h5
+*.pkl
+*.onnx
+*.bin
+*.pb
+*.tflite
+weights/
+app/weights/
