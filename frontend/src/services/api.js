@@ -1,6 +1,6 @@
 // API Service for DriveSafe Backend
 
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 // =========================================
 // VIDEO UPLOAD SERVICE
@@ -68,7 +68,8 @@ export class WebSocketService {
     }
     this.reconnectAttempts = 0;
     
-    let wsUrl = `ws://localhost:8000/ws`;
+    const wsBase = (import.meta.env.VITE_API_URL || 'http://localhost:8000').replace(/^http/, 'ws');
+    let wsUrl = `${wsBase}/ws`;
     if (sessionId) {
       wsUrl += `?session_id=${sessionId}`;
     }

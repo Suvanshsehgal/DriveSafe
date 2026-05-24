@@ -389,7 +389,7 @@ export default function DemoDashboard() {
                     className="w-full aspect-video"
                     controls
                     autoPlay
-                    src={`http://localhost:8000${outputVideoUrl}`}
+                    src={`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}${outputVideoUrl}`}
                   >
                     Your browser does not support the video tag.
                   </video>
