@@ -15,7 +15,16 @@ RUN apt-get update && apt-get install -y \
 
 COPY requirements-hf.txt .
 
-RUN pip install --no-cache-dir --timeout 600 -r requirements-hf.txt
+RUN pip install --no-cache-dir --timeout 300 --retries 5 \
+    fastapi uvicorn[standard] websockets python-multipart \
+    opencv-python numpy pillow scipy imutils \
+    mediapipe \
+    pydantic python-dotenv \
+    matplotlib pandas \
+    aiofiles asyncio \
+    requests
+
+RUN pip install --no-cache-dir --timeout 600 --retries 5 ultralytics timm
 
 COPY . .
 
