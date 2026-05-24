@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM pytorch/pytorch:2.5.1-cuda12.1-cudnn8-runtime
 
 WORKDIR /app
 
@@ -12,18 +12,12 @@ RUN apt-get update && apt-get install -y \
     wget \
     && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt .
-
-RUN pip install --no-cache-dir --timeout 300 torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
-RUN pip install --no-cache-dir --timeout 300 -r requirements.txt
+COPY requirements-hf.txt requirements.txt
+RUN pip install --no-cache-dir -r requirements-hf.txt
 
 COPY . .
 
-RUN mkdir -p weights app/weights
-
-ARG HF_YOLO_REPO
-ENV HF_YOLO_REPO=${HF_YOLO_REPO}
-RUN python download_weights.py
+RUN mkdir -p weights app/weights && python download_weights.py
 
 EXPOSE 7860
 
