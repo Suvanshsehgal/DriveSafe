@@ -9,7 +9,7 @@ from pathlib import Path
 from app.websocket.stream_handler import (
     websocket_endpoint
 )
-from app.processors.video_processor import process_video_files
+from app.processors.video_processor import process_video_files, get_processing_status, get_processing_results
 
 # =========================================
 # FASTAPI APP
@@ -139,14 +139,27 @@ async def upload_videos(
 # =========================================
 
 @app.get("/api/processing/{session_id}")
-async def get_processing_status(session_id: str):
-    # In a real implementation, you would check processing status from a database or queue
-    # For now, return a mock response
+async def get_processing_status_route(session_id: str):
+    return get_processing_status(session_id)
+
+@app.get("/api/processing/{session_id}/output")
+async def get_processing_output(session_id: str):
+    results = get_processing_results(session_id)
+    if results.get("status") == "not_found":
+        raise HTTPException(status_code=404, detail="Session not found")
+    
+    output_path = Path("outputs") / f"{session_id}_result.mp4"
+    if not output_path.exists():
+        return {
+            "session_id": session_id,
+            "output_available": False,
+            "message": "Output video not yet generated"
+        }
+    
     return {
         "session_id": session_id,
-        "status": "processing",
-        "progress": 0.5,
-        "estimated_time_remaining": 30
+        "output_available": True,
+        "output_url": f"/outputs/{session_id}_result.mp4"
     }
 
 # =========================================

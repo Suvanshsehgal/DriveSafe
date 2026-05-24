@@ -21,14 +21,14 @@ def fuse_risk_scores(
     # WEIGHTED FUSION
     # -------------------------------------
 
-    # 60% road
-    # 40% driver
+    # 40% road
+    # 60% driver
 
     fused_score = (
 
-        0.60 * road_score +
+        0.40 * road_score +
 
-        0.40 * driver_score
+        0.60 * driver_score
     )
 
     # Clamp score
@@ -41,13 +41,13 @@ def fuse_risk_scores(
     # FINAL RISK LEVEL
     # -------------------------------------
 
-    if fused_score < 0.35:
+    if fused_score < 0.40:
 
         risk_level = "LOW"
 
         color = (0, 255, 0)
 
-    elif fused_score < 0.65:
+    elif fused_score < 0.75:
 
         risk_level = "MEDIUM"
 

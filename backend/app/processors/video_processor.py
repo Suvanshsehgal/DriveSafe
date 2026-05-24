@@ -159,6 +159,13 @@ class VideoProcessor:
             
         except Exception as e:
             self.processing = False
+            
+            if self.result_queue is not None:
+                self.result_queue.put({
+                    "status": "error",
+                    "message": f"Video processing failed: {str(e)}"
+                })
+            
             return {
                 "status": "error",
                 "error": str(e)
