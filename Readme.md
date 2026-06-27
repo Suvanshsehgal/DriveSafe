@@ -1,6 +1,3 @@
-<div align="center">
-  <img src="./frontend/src/assets/hero.png" alt="DriveSafe Hero" width="100%" />
-
   # DriveSafe 🚗🛡️
 
   **Real-Time AI-Powered Advanced Driver Assistance System (ADAS) for Indian Roads**
