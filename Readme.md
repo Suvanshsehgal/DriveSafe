@@ -254,20 +254,3 @@ vercel --prod
 
 ### Backend (Hugging Face Spaces)
 The backend includes a Dockerfile configured for Hugging Face Spaces with `sdk: docker`.
-
----
-
-## 🛣️ Roadmap
-
-- [ ] Real-time camera input (USB/RTSP) in addition to video upload
-- [ ] Multi-session concurrent processing with isolated driver state
-- [ ] Unit & integration tests
-- [ ] Mobile companion app
-- [ ] On-device edge deployment (NVIDIA Jetson / Raspberry Pi)
-- [ ] Additional Indian-specific hazard classes (speed bumps, potholes)
-
----
-
-## 📄 License
-
-MIT
